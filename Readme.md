@@ -35,7 +35,7 @@ Properties / Methods
    `+ (void)setArrowHeight:(CGFloat)arrowHeight;`  
 	set arrow width (base) / height
 
- - `+ (void)setImages:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left;`  
+ - `+ (void)setBackgroundImage: top: right: bottom: left:`  
 	set custom images for background and top/right/bottom/left arrows
 
  - `+ (void)rebuildArrowImages;`  

@@ -32,7 +32,7 @@
 + (void)setArrowHeight:(CGFloat)arrowHeight;
 
 // set custom images for background and top/right/bottom/left arrows
-+ (void)setImages:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left;
++ (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left;
 
 // rebuild pre-rendered arrow/background images
 + (void)rebuildArrowImages;

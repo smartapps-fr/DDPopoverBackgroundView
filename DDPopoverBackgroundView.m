@@ -112,7 +112,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	s_ArrowHeight = arrowHeight;
 }
 
-+ (void)setImages:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left
++ (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left
 {
 	[s_DefaultBackgroundImage release];
 	s_DefaultBackgroundImage = [background retain];
