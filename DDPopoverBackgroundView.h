@@ -3,6 +3,10 @@
 // https://github.com/ddebin/DDPopoverBackgroundView
 //
 
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
 #import <UIKit/UIKit.h>
 #import <UIKit/UIPopoverBackgroundView.h>
 
