@@ -1,6 +1,7 @@
 //
 // DDPopoverBackgroundView.m
 // https://github.com/ddebin/DDPopoverBackgroundView
+// https://github.com/coch3/DDPopoverBackgroundView
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -93,8 +94,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 + (void)setTintColor:(UIColor *)tintColor
 {
-	[s_TintColor release];
-	s_TintColor = [tintColor retain];
+	s_TintColor = tintColor;
 }
 
 + (void)setShadowEnabled:(BOOL)shadowEnabled
@@ -112,22 +112,13 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	s_ArrowHeight = arrowHeight;
 }
 
-+ (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left
-{
-	[s_DefaultBackgroundImage release];
-	s_DefaultBackgroundImage = [background retain];
-
-	[s_DefaultTopArrowImage release];
-	s_DefaultTopArrowImage = [top retain];
-	
-	[s_DefaultRightArrowImage release];
-	s_DefaultRightArrowImage = [right retain];
-	
-	[s_DefaultBottomArrowImage release];
-	s_DefaultBottomArrowImage = [bottom retain];
-	
-	[s_DefaultLeftArrowImage release];
-	s_DefaultLeftArrowImage = [left retain];
++ (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left {
+    
+	s_DefaultBackgroundImage = background;
+	s_DefaultTopArrowImage = top;
+	s_DefaultRightArrowImage = right;
+	s_DefaultBottomArrowImage = bottom;
+	s_DefaultLeftArrowImage = left;
 }
 
 
@@ -139,15 +130,13 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	{
 		if ((s_DefaultBackgroundImage == nil) || (s_DefaultTopArrowImage == nil) || (s_DefaultRightArrowImage == nil) || (s_DefaultBottomArrowImage == nil) || (s_DefaultLeftArrowImage == nil))
 		{
-			if (s_TintColor == nil) s_TintColor = [DEFAULT_TINT_COLOR retain];
+			if (s_TintColor == nil) s_TintColor = DEFAULT_TINT_COLOR;
 			[DDPopoverBackgroundView buildArrowImagesWithTintColor:s_TintColor];
 		}
 
-		[popoverBackgroundImageView release];
 		popoverBackgroundImageView = [[UIImageView alloc] initWithImage:s_DefaultBackgroundImage];
 		[self addSubview:popoverBackgroundImageView];
 		
-		[arrowImageView release];
 		arrowImageView = [[UIImageView alloc] init];
 		[self addSubview:arrowImageView];
 		
@@ -167,13 +156,6 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[arrowImageView release];
-	[popoverBackgroundImageView release];
-	[super dealloc];
 }
 
 
@@ -200,9 +182,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	
 	[tintColor setFill];
 	[arrowPath fill];
-	
-	[s_DefaultTopArrowImage release];
-	s_DefaultTopArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+    
+	s_DefaultTopArrowImage = UIGraphicsGetImageFromCurrentImageContext();
 	
 	UIGraphicsEndImageContext();
 	
@@ -219,8 +200,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultBottomArrowImage release];
-	s_DefaultBottomArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	s_DefaultBottomArrowImage = UIGraphicsGetImageFromCurrentImageContext();
 	
 	UIGraphicsEndImageContext();
 	
@@ -237,8 +217,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultLeftArrowImage release];
-	s_DefaultLeftArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	s_DefaultLeftArrowImage = UIGraphicsGetImageFromCurrentImageContext();
 	
 	UIGraphicsEndImageContext();
 	
@@ -255,8 +234,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultRightArrowImage release];
-	s_DefaultRightArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	s_DefaultRightArrowImage = UIGraphicsGetImageFromCurrentImageContext();
 	
 	UIGraphicsEndImageContext();
 	
@@ -271,8 +249,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
     UIEdgeInsets capInsets = UIEdgeInsetsMake(BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET);
 
-	[s_DefaultBackgroundImage release];
-    s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] retain];
+    s_DefaultBackgroundImage = [UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets];
     
     UIGraphicsEndImageContext();
 }
