@@ -3,6 +3,45 @@
 // https://github.com/ddebin/DDPopoverBackgroundView
 //
 
+
+//
+//  ARC Helper
+//
+//  Version 2.2
+//
+//  Created by Nick Lockwood on 05/01/2012.
+//  Copyright 2012 Charcoal Design
+//
+//  Distributed under the permissive zlib license
+//  Get the latest version from here:
+//
+//  https://gist.github.com/1563325
+//
+
+#import <Availability.h>
+#undef ah_retain
+#undef ah_dealloc
+#undef ah_autorelease
+#undef ah_dealloc
+#if __has_feature(objc_arc)
+#define ah_retain self
+#define ah_release self
+#define ah_autorelease self
+#define ah_dealloc self
+#else
+#define ah_retain retain
+#define ah_release release
+#define ah_autorelease autorelease
+#define ah_dealloc dealloc
+#undef __bridge
+#define __bridge
+#undef __bridge_transfer
+#define __bridge_transfer
+#endif
+
+//  ARC Helper ends
+
+
 #import <QuartzCore/QuartzCore.h>
 #import "DDPopoverBackgroundView.h"
 
@@ -93,8 +132,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 + (void)setTintColor:(UIColor *)tintColor
 {
-	[s_TintColor release];
-	s_TintColor = [tintColor retain];
+	[s_TintColor ah_release];
+	s_TintColor = [tintColor ah_retain];
 }
 
 + (void)setShadowEnabled:(BOOL)shadowEnabled
@@ -114,20 +153,20 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 + (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left
 {
-	[s_DefaultBackgroundImage release];
-	s_DefaultBackgroundImage = [background retain];
+	[s_DefaultBackgroundImage ah_release];
+	s_DefaultBackgroundImage = [background ah_retain];
 
-	[s_DefaultTopArrowImage release];
-	s_DefaultTopArrowImage = [top retain];
+	[s_DefaultTopArrowImage ah_release];
+	s_DefaultTopArrowImage = [top ah_retain];
 	
-	[s_DefaultRightArrowImage release];
-	s_DefaultRightArrowImage = [right retain];
+	[s_DefaultRightArrowImage ah_release];
+	s_DefaultRightArrowImage = [right ah_retain];
 	
-	[s_DefaultBottomArrowImage release];
-	s_DefaultBottomArrowImage = [bottom retain];
+	[s_DefaultBottomArrowImage ah_release];
+	s_DefaultBottomArrowImage = [bottom ah_retain];
 	
-	[s_DefaultLeftArrowImage release];
-	s_DefaultLeftArrowImage = [left retain];
+	[s_DefaultLeftArrowImage ah_release];
+	s_DefaultLeftArrowImage = [left ah_retain];
 }
 
 
@@ -139,15 +178,15 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	{
 		if ((s_DefaultBackgroundImage == nil) || (s_DefaultTopArrowImage == nil) || (s_DefaultRightArrowImage == nil) || (s_DefaultBottomArrowImage == nil) || (s_DefaultLeftArrowImage == nil))
 		{
-			if (s_TintColor == nil) s_TintColor = [DEFAULT_TINT_COLOR retain];
+			if (s_TintColor == nil) s_TintColor = [DEFAULT_TINT_COLOR ah_retain];
 			[DDPopoverBackgroundView buildArrowImagesWithTintColor:s_TintColor];
 		}
 
-		[popoverBackgroundImageView release];
+		[popoverBackgroundImageView ah_release];
 		popoverBackgroundImageView = [[UIImageView alloc] initWithImage:s_DefaultBackgroundImage];
 		[self addSubview:popoverBackgroundImageView];
 		
-		[arrowImageView release];
+		[arrowImageView ah_release];
 		arrowImageView = [[UIImageView alloc] init];
 		[self addSubview:arrowImageView];
 		
@@ -171,9 +210,9 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 - (void)dealloc
 {
-	[arrowImageView release];
-	[popoverBackgroundImageView release];
-	[super dealloc];
+	[arrowImageView ah_release];
+	[popoverBackgroundImageView ah_release];
+	[super ah_dealloc];
 }
 
 
@@ -201,8 +240,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultTopArrowImage release];
-	s_DefaultTopArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	[s_DefaultTopArrowImage ah_release];
+	s_DefaultTopArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
 	
 	UIGraphicsEndImageContext();
 	
@@ -219,8 +258,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultBottomArrowImage release];
-	s_DefaultBottomArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	[s_DefaultBottomArrowImage ah_release];
+	s_DefaultBottomArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
 	
 	UIGraphicsEndImageContext();
 	
@@ -237,8 +276,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultLeftArrowImage release];
-	s_DefaultLeftArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	[s_DefaultLeftArrowImage ah_release];
+	s_DefaultLeftArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
 	
 	UIGraphicsEndImageContext();
 	
@@ -255,8 +294,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[arrowPath fill];
 	
-	[s_DefaultRightArrowImage release];
-	s_DefaultRightArrowImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	[s_DefaultRightArrowImage ah_release];
+	s_DefaultRightArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
 	
 	UIGraphicsEndImageContext();
 	
@@ -271,8 +310,8 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
     UIEdgeInsets capInsets = UIEdgeInsetsMake(BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET);
 
-	[s_DefaultBackgroundImage release];
-    s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] retain];
+	[s_DefaultBackgroundImage ah_release];
+    s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] ah_retain];
     
     UIGraphicsEndImageContext();
 }
