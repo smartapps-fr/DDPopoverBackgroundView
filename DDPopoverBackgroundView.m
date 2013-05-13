@@ -33,10 +33,6 @@
 #define ah_release release
 #define ah_autorelease autorelease
 #define ah_dealloc dealloc
-#undef __bridge
-#define __bridge
-#undef __bridge_transfer
-#define __bridge_transfer
 #endif
 
 //  ARC Helper ends
@@ -208,12 +204,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	[arrowImageView ah_release];
-	[popoverBackgroundImageView ah_release];
-	[super ah_dealloc];
+	[arrowImageView release];
+	[popoverBackgroundImageView release];
+	[super dealloc];
 }
+#endif
 
 
 #pragma mark - Arrow images build
