@@ -151,16 +151,16 @@ static UIImage *s_DefaultBackgroundImage = nil;
 {
 	[s_DefaultBackgroundImage ah_release];
 	s_DefaultBackgroundImage = [background ah_retain];
-
+	
 	[s_DefaultTopArrowImage ah_release];
 	s_DefaultTopArrowImage = [top ah_retain];
-
+	
 	[s_DefaultRightArrowImage ah_release];
 	s_DefaultRightArrowImage = [right ah_retain];
-
+	
 	[s_DefaultBottomArrowImage ah_release];
 	s_DefaultBottomArrowImage = [bottom ah_retain];
-
+	
 	[s_DefaultLeftArrowImage ah_release];
 	s_DefaultLeftArrowImage = [left ah_retain];
 }
@@ -177,22 +177,22 @@ static UIImage *s_DefaultBackgroundImage = nil;
 			if (s_TintColor == nil) s_TintColor = [DEFAULT_TINT_COLOR ah_retain];
 			[DDPopoverBackgroundView buildArrowImagesWithTintColor:s_TintColor];
 		}
-
+		
 		[popoverBackgroundImageView ah_release];
 		popoverBackgroundImageView = [[UIImageView alloc] initWithImage:s_DefaultBackgroundImage];
 		[self addSubview:popoverBackgroundImageView];
-
+		
 		[arrowImageView ah_release];
 		arrowImageView = [[UIImageView alloc] init];
 		[self addSubview:arrowImageView];
-
+		
 		if (s_ShadowEnabled)
 		{
 			popoverBackgroundImageView.layer.shadowColor = [UIColor blackColor].CGColor;
 			popoverBackgroundImageView.layer.shadowOpacity = 0.4f;
 			popoverBackgroundImageView.layer.shadowRadius = 2.0f;
 			popoverBackgroundImageView.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
-
+			
 			arrowImageView.layer.shadowColor = [UIColor blackColor].CGColor;
 			arrowImageView.layer.shadowOpacity = 0.4f;
 			arrowImageView.layer.shadowRadius = 2.0f;
@@ -200,7 +200,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 			arrowImageView.layer.masksToBounds = YES;
 		}
 	}
-
+	
 	return self;
 }
 
@@ -224,93 +224,93 @@ static UIImage *s_DefaultBackgroundImage = nil;
 + (void)buildArrowImagesWithTintColor:(UIColor *)tintColor
 {
 	UIBezierPath *arrowPath;
-
+	
 	// top arrow
-
-	UIGraphicsBeginImageContext(CGSizeMake(s_ArrowBase, s_ArrowHeight));
-
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(s_ArrowBase, s_ArrowHeight), NO, 0.0f);
+	
 	arrowPath = [UIBezierPath bezierPath];
 	[arrowPath moveToPoint:	  CGPointMake(s_ArrowBase/2.0f, 0.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowBase, s_ArrowHeight)];
 	[arrowPath addLineToPoint:CGPointMake(0.0f, s_ArrowHeight)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowBase/2.0f, 0.0f)];
-
+	
 	[tintColor setFill];
 	[arrowPath fill];
-
+	
 	[s_DefaultTopArrowImage ah_release];
 	s_DefaultTopArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
-
+	
 	UIGraphicsEndImageContext();
-
+	
 	// bottom arrow
-
-	UIGraphicsBeginImageContext(CGSizeMake(s_ArrowBase, s_ArrowHeight));
-
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(s_ArrowBase, s_ArrowHeight), NO, 0.0f);
+	
 	arrowPath = [UIBezierPath bezierPath];
 	[arrowPath moveToPoint:	  CGPointMake(0.0f, 0.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowBase, 0.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowBase/2.0f, s_ArrowHeight)];
 	[arrowPath addLineToPoint:CGPointMake(0.0f, 0.0f)];
-
+	
 	[tintColor setFill];
 	[arrowPath fill];
-
+	
 	[s_DefaultBottomArrowImage ah_release];
 	s_DefaultBottomArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
-
+	
 	UIGraphicsEndImageContext();
-
+	
 	// left arrow
-
-	UIGraphicsBeginImageContext(CGSizeMake(s_ArrowHeight, s_ArrowBase));
-
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(s_ArrowHeight, s_ArrowBase), NO, 0.0f);
+	
 	arrowPath = [UIBezierPath bezierPath];
 	[arrowPath moveToPoint:	  CGPointMake(s_ArrowHeight, 0.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowHeight, s_ArrowBase)];
 	[arrowPath addLineToPoint:CGPointMake(0.0f, s_ArrowBase/2.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowHeight, 0.0f)];
-
+	
 	[tintColor setFill];
 	[arrowPath fill];
-
+	
 	[s_DefaultLeftArrowImage ah_release];
 	s_DefaultLeftArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
-
+	
 	UIGraphicsEndImageContext();
-
+	
 	// right arrow
-
-	UIGraphicsBeginImageContext(CGSizeMake(s_ArrowHeight, s_ArrowBase));
-
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(s_ArrowHeight, s_ArrowBase), NO, 0.0f);
+	
 	arrowPath = [UIBezierPath bezierPath];
 	[arrowPath moveToPoint:	  CGPointMake(0.0f, 0.0f)];
 	[arrowPath addLineToPoint:CGPointMake(s_ArrowHeight, s_ArrowBase/2.0f)];
 	[arrowPath addLineToPoint:CGPointMake(0.0f, s_ArrowBase)];
 	[arrowPath addLineToPoint:CGPointMake(0.0f, 0.0f)];
-
+	
 	[tintColor setFill];
 	[arrowPath fill];
-
+	
 	[s_DefaultRightArrowImage ah_release];
 	s_DefaultRightArrowImage = [UIGraphicsGetImageFromCurrentImageContext() ah_retain];
-
+	
 	UIGraphicsEndImageContext();
-
+	
 	// background
-
-	UIGraphicsBeginImageContext(CGSizeMake(BKG_IMAGE_SIZE, BKG_IMAGE_SIZE));
-
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(BKG_IMAGE_SIZE, BKG_IMAGE_SIZE), NO, 0.0f);
+	
 	UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.0f, 0.0f, BKG_IMAGE_SIZE, BKG_IMAGE_SIZE)
 														  cornerRadius:BKG_IMAGE_CORNER_RADIUS];
 	[tintColor setFill];
 	[borderPath fill];
-
+	
 	UIEdgeInsets capInsets = UIEdgeInsetsMake(BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET);
-
+	
 	[s_DefaultBackgroundImage ah_release];
 	s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] ah_retain];
-
+	
 	UIGraphicsEndImageContext();
 }
 
@@ -321,116 +321,116 @@ static UIImage *s_DefaultBackgroundImage = nil;
 {
 	CGFloat popoverImageOriginX = 0.0f;
 	CGFloat popoverImageOriginY = 0.0f;
-
+	
 	CGFloat popoverImageWidth = self.bounds.size.width;
 	CGFloat popoverImageHeight = self.bounds.size.height;
-
+	
 	CGFloat arrowImageOriginX = 0.0f;
 	CGFloat arrowImageOriginY = 0.0f;
-
+	
 	CGFloat arrowImageWidth = s_ArrowBase;
 	CGFloat arrowImageHeight = s_ArrowHeight;
-
+	
 	switch (self.arrowDirection)
 	{
 		case UIPopoverArrowDirectionUp:
-
+			
 			popoverImageOriginY = s_ArrowHeight;
 			popoverImageHeight = self.bounds.size.height - s_ArrowHeight;
-
+			
 			// Calculating arrow x position using arrow offset, arrow width and popover width
 			arrowImageOriginX = roundf((self.bounds.size.width - s_ArrowBase) / 2.0f + self.arrowOffset);
-
+			
 			// If arrow image exceeds rounded corner arrow image x postion is adjusted
 			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - BKG_IMAGE_CORNER_RADIUS))
 			{
 				arrowImageOriginX -= BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			if (arrowImageOriginX < BKG_IMAGE_CORNER_RADIUS)
 			{
 				arrowImageOriginX += BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			// Setting arrow image for current arrow direction
 			arrowImageView.image = s_DefaultTopArrowImage;
-
+			
 			break;
-
+			
 		case UIPopoverArrowDirectionDown:
-
+			
 			popoverImageHeight = self.bounds.size.height - s_ArrowHeight;
-
+			
 			arrowImageOriginX = roundf((self.bounds.size.width - s_ArrowBase) / 2.0f + self.arrowOffset);
-
+			
 			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - BKG_IMAGE_CORNER_RADIUS))
 			{
 				arrowImageOriginX -= BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			if (arrowImageOriginX < BKG_IMAGE_CORNER_RADIUS)
 			{
 				arrowImageOriginX += BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			arrowImageOriginY = popoverImageHeight;
-
+			
 			arrowImageView.image = s_DefaultBottomArrowImage;
-
+			
 			break;
-
+			
 		case UIPopoverArrowDirectionLeft:
-
+			
 			popoverImageOriginX = s_ArrowHeight;
 			popoverImageWidth = self.bounds.size.width - s_ArrowHeight;
-
+			
 			arrowImageOriginY = roundf((self.bounds.size.height - s_ArrowBase) / 2.0f + self.arrowOffset);
-
+			
 			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - BKG_IMAGE_CORNER_RADIUS))
 			{
 				arrowImageOriginY -= BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			if (arrowImageOriginY < BKG_IMAGE_CORNER_RADIUS)
 			{
 				arrowImageOriginY += BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			arrowImageWidth = s_ArrowHeight;
 			arrowImageHeight = s_ArrowBase;
-
+			
 			arrowImageView.image = s_DefaultLeftArrowImage;
-
+			
 			break;
-
+			
 		case UIPopoverArrowDirectionRight:
-
+			
 			popoverImageWidth = self.bounds.size.width - s_ArrowHeight;
-
+			
 			arrowImageOriginX = popoverImageWidth;
 			arrowImageOriginY = roundf((self.bounds.size.height - s_ArrowBase) / 2.0f + self.arrowOffset);
-
+			
 			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - BKG_IMAGE_CORNER_RADIUS))
 			{
 				arrowImageOriginY -= BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			if (arrowImageOriginY < BKG_IMAGE_CORNER_RADIUS)
 			{
 				arrowImageOriginY += BKG_IMAGE_CORNER_RADIUS;
 			}
-
+			
 			arrowImageWidth = s_ArrowHeight;
 			arrowImageHeight = s_ArrowBase;
-
+			
 			arrowImageView.image = s_DefaultRightArrowImage;
-
+			
 			break;
-
+			
 		default:
 			break;
 	}
-
+	
 	popoverBackgroundImageView.frame = CGRectMake(popoverImageOriginX, popoverImageOriginY, popoverImageWidth, popoverImageHeight);
 	arrowImageView.frame = CGRectMake(arrowImageOriginX, arrowImageOriginY, arrowImageWidth, arrowImageHeight);
 }
