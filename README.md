@@ -50,3 +50,7 @@ DDPopoverBackgroundView is available under the MIT license. See the LICENSE file
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ddebin/ddpopoverbackgroundview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ddebin/ddpopoverbackgroundview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
