@@ -50,7 +50,7 @@ static CGFloat s_ArrowHeight = DEFAULT_ARROW_HEIGHT;
 
 #define BKG_IMAGE_SIZE 40.0f
 #define BKG_IMAGE_CORNER_RADIUS 8.0f
-#define BKG_IMAGE_CAPINSET (BKG_IMAGE_CORNER_RADIUS * 2.0f)
+static CGFloat s_BackgroundImageCornerRadius = BKG_IMAGE_CORNER_RADIUS;
 
 #define TOP_CONTENT_INSET s_ContentInset
 #define LEFT_CONTENT_INSET s_ContentInset
@@ -81,6 +81,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 
 #pragma mark - Overriden class methods
+
++ (CGFloat)backgroundImageCornerRadius{
+    return s_BackgroundImageCornerRadius;
+}
+
++ (void)setBackgroundImageCornerRadius:(CGFloat)aCornerRadius{
+    s_BackgroundImageCornerRadius = aCornerRadius;
+}
 
 // The width of the arrow triangle at its base.
 + (CGFloat)arrowBase
@@ -302,11 +310,12 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	UIGraphicsBeginImageContextWithOptions(CGSizeMake(BKG_IMAGE_SIZE, BKG_IMAGE_SIZE), NO, 0.0f);
 
 	UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.0f, 0.0f, BKG_IMAGE_SIZE, BKG_IMAGE_SIZE)
-														  cornerRadius:BKG_IMAGE_CORNER_RADIUS];
+														  cornerRadius:s_BackgroundImageCornerRadius];
 	[tintColor setFill];
 	[borderPath fill];
 
-	UIEdgeInsets capInsets = UIEdgeInsetsMake(BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET);
+    CGFloat backgroundImageCapInset = (s_BackgroundImageCornerRadius * 2.0f);
+	UIEdgeInsets capInsets = UIEdgeInsetsMake(backgroundImageCapInset, backgroundImageCapInset, backgroundImageCapInset, backgroundImageCapInset);
 
 	[s_DefaultBackgroundImage ah_release];
 	s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] ah_retain];
@@ -342,14 +351,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 			arrowImageOriginX = roundf((self.bounds.size.width - s_ArrowBase) / 2.0f + self.arrowOffset);
 
 			// If arrow image exceeds rounded corner arrow image x postion is adjusted
-			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - BKG_IMAGE_CORNER_RADIUS))
+			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - s_BackgroundImageCornerRadius))
 			{
-				arrowImageOriginX -= BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginX -= s_BackgroundImageCornerRadius;
 			}
 
-			if (arrowImageOriginX < BKG_IMAGE_CORNER_RADIUS)
+			if (arrowImageOriginX < s_BackgroundImageCornerRadius)
 			{
-				arrowImageOriginX += BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginX += s_BackgroundImageCornerRadius;
 			}
 
 			// Setting arrow image for current arrow direction
@@ -363,14 +372,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 			arrowImageOriginX = roundf((self.bounds.size.width - s_ArrowBase) / 2.0f + self.arrowOffset);
 
-			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - BKG_IMAGE_CORNER_RADIUS))
+			if ((arrowImageOriginX + s_ArrowBase) > (self.bounds.size.width - s_BackgroundImageCornerRadius))
 			{
-				arrowImageOriginX -= BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginX -= s_BackgroundImageCornerRadius;
 			}
 
-			if (arrowImageOriginX < BKG_IMAGE_CORNER_RADIUS)
+			if (arrowImageOriginX < s_BackgroundImageCornerRadius)
 			{
-				arrowImageOriginX += BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginX += s_BackgroundImageCornerRadius;
 			}
 
 			arrowImageOriginY = popoverImageHeight;
@@ -386,14 +395,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 			arrowImageOriginY = roundf((self.bounds.size.height - s_ArrowBase) / 2.0f + self.arrowOffset);
 
-			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - BKG_IMAGE_CORNER_RADIUS))
+			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - s_BackgroundImageCornerRadius))
 			{
-				arrowImageOriginY -= BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginY -= s_BackgroundImageCornerRadius;
 			}
 
-			if (arrowImageOriginY < BKG_IMAGE_CORNER_RADIUS)
+			if (arrowImageOriginY < s_BackgroundImageCornerRadius)
 			{
-				arrowImageOriginY += BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginY += s_BackgroundImageCornerRadius;
 			}
 
 			arrowImageWidth = s_ArrowHeight;
@@ -410,14 +419,14 @@ static UIImage *s_DefaultBackgroundImage = nil;
 			arrowImageOriginX = popoverImageWidth;
 			arrowImageOriginY = roundf((self.bounds.size.height - s_ArrowBase) / 2.0f + self.arrowOffset);
 
-			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - BKG_IMAGE_CORNER_RADIUS))
+			if ((arrowImageOriginY + s_ArrowBase) > (self.bounds.size.height - s_BackgroundImageCornerRadius))
 			{
-				arrowImageOriginY -= BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginY -= s_BackgroundImageCornerRadius;
 			}
 
-			if (arrowImageOriginY < BKG_IMAGE_CORNER_RADIUS)
+			if (arrowImageOriginY < s_BackgroundImageCornerRadius)
 			{
-				arrowImageOriginY += BKG_IMAGE_CORNER_RADIUS;
+				arrowImageOriginY += s_BackgroundImageCornerRadius;
 			}
 
 			arrowImageWidth = s_ArrowHeight;

@@ -41,4 +41,8 @@
 // rebuild pre-rendered arrow/background images
 + (void)rebuildArrowImages;
 
+// Set the corners radius
++ (CGFloat)backgroundImageCornerRadius;
++ (void)setBackgroundImageCornerRadius:(CGFloat)aCornerRadius;
+
 @end
