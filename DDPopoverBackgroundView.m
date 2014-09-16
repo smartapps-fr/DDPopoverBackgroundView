@@ -84,19 +84,25 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 #pragma mark - Overriden class methods
 
-// The width of the arrow triangle at its base.
+/**
+ Return the width of the arrow triangle at its base.
+ */
 + (CGFloat)arrowBase
 {
 	return s_ArrowBase;
 }
 
-// The height of the arrow (measured in points) from its base to its tip.
+/**
+ Return the height of the arrow (measured in points) from its base to its tip.
+ */
 + (CGFloat)arrowHeight
 {
 	return s_ArrowHeight;
 }
 
-// The insets for the content portion of the popover.
+/**
+ Return the insets for the content portion of the popover.
+ */
 + (UIEdgeInsets)contentViewInsets
 {
 	return UIEdgeInsetsMake(TOP_CONTENT_INSET, LEFT_CONTENT_INSET, BOTTOM_CONTENT_INSET, RIGHT_CONTENT_INSET);
@@ -105,8 +111,10 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 #pragma mark - Custom setters for updating layout
 
-// Whenever arrow changes direction or position layout subviews will be called
-// in order to update arrow and backgorund frames
+/*
+ Whenever arrow changes direction or position, layout subviews will be called
+ in order to update arrow and background frames
+ */
 
 - (void)setArrowOffset:(CGFloat)_arrowOffset
 {

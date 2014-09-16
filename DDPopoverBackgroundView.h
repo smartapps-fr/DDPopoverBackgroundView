@@ -4,13 +4,15 @@
 //
 
 #ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
+	#warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
 #import <UIKit/UIKit.h>
 #import <UIKit/UIPopoverBackgroundView.h>
 
-
+/**
+ `DDPopoverBackgroundView` is a class to help customizing `UIPopoverController` popovers.
+ */
 @interface DDPopoverBackgroundView : UIPopoverBackgroundView
 {
 	CGFloat						arrowOffset;
@@ -22,26 +24,62 @@
 @property (nonatomic, readwrite) CGFloat arrowOffset;
 @property (nonatomic, readwrite) UIPopoverArrowDirection arrowDirection;
 
-// adjust content inset (~ border width)
+/**
+ Adjust content inset (~ border width)
+
+ @param contentInset The content inset
+ */
 + (void)setContentInset:(CGFloat)contentInset;
 
-// set tint color used for arrow and popover background
+/**
+ Set tint color used for arrow and popover background
+
+ @param tintColor A `UIColor` for tint
+ */
 + (void)setTintColor:(UIColor *)tintColor;
 
-// enable/disable shadow under popover
+/**
+ Enable/disable shadow under popover
+
+ @param shadowEnabled Whether or not to enable shadow
+ */
 + (void)setShadowEnabled:(BOOL)shadowEnabled;
 
-// set arrow width (base) / height
+/**
+ Set arrow width (base)
+
+ @param arrowBase Arrow width
+ */
 + (void)setArrowBase:(CGFloat)arrowBase;
+
+/**
+ Set arrow height
+
+ @param arrowHeight Arrow height
+ */
 + (void)setArrowHeight:(CGFloat)arrowHeight;
 
-// Set the corners radius
+/**
+ Set the background image corners radius
+
+ @param cornerRadius Border corner radius
+ */
 + (void)setBackgroundImageCornerRadius:(CGFloat)cornerRadius;
 
-// set custom images for background and top/right/bottom/left arrows
+/**
+ Set custom images for background and top/right/bottom/left arrows
+
+ @param background Image for background
+ @param top Image for top
+ @param right Image for right
+ @param bottom Image for bottom
+ @param left Image for left
+ */
 + (void)setBackgroundImage:(UIImage *)background top:(UIImage *)top right:(UIImage *)right bottom:(UIImage *)bottom left:(UIImage *)left;
 
-// rebuild pre-rendered arrow/background images
+/**
+ Rebuild pre-rendered arrow/background images
+ */
 + (void)rebuildArrowImages;
 
 @end
