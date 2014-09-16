@@ -50,7 +50,9 @@ static CGFloat s_ArrowHeight = DEFAULT_ARROW_HEIGHT;
 
 #define BKG_IMAGE_SIZE 40.0f
 #define BKG_IMAGE_CORNER_RADIUS 8.0f
+
 static CGFloat s_BackgroundImageCornerRadius = BKG_IMAGE_CORNER_RADIUS;
+#define BKG_IMAGE_CAPINSET (s_BackgroundImageCornerRadius * 2.0f)
 
 #define TOP_CONTENT_INSET s_ContentInset
 #define LEFT_CONTENT_INSET s_ContentInset
@@ -81,14 +83,6 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 
 #pragma mark - Overriden class methods
-
-+ (CGFloat)backgroundImageCornerRadius{
-    return s_BackgroundImageCornerRadius;
-}
-
-+ (void)setBackgroundImageCornerRadius:(CGFloat)aCornerRadius{
-    s_BackgroundImageCornerRadius = aCornerRadius;
-}
 
 // The width of the arrow triangle at its base.
 + (CGFloat)arrowBase
@@ -128,6 +122,11 @@ static UIImage *s_DefaultBackgroundImage = nil;
 
 
 #pragma mark - Global statics setters
+
++ (void)setBackgroundImageCornerRadius:(CGFloat)cornerRadius
+{
+    s_BackgroundImageCornerRadius = cornerRadius;
+}
 
 + (void)setContentInset:(CGFloat)contentInset
 {
@@ -314,8 +313,7 @@ static UIImage *s_DefaultBackgroundImage = nil;
 	[tintColor setFill];
 	[borderPath fill];
 
-    CGFloat backgroundImageCapInset = (s_BackgroundImageCornerRadius * 2.0f);
-	UIEdgeInsets capInsets = UIEdgeInsetsMake(backgroundImageCapInset, backgroundImageCapInset, backgroundImageCapInset, backgroundImageCapInset);
+	UIEdgeInsets capInsets = UIEdgeInsetsMake(BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET, BKG_IMAGE_CAPINSET);
 
 	[s_DefaultBackgroundImage ah_release];
 	s_DefaultBackgroundImage = [[UIGraphicsGetImageFromCurrentImageContext() resizableImageWithCapInsets:capInsets] ah_retain];

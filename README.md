@@ -28,6 +28,9 @@ Properties / Methods
  - `+ (void)setTintColor:(UIColor *)tintColor;`
 	set tint color used for arrow and popover background
 
+ - `+ (void)setBackgroundImageCornerRadius:(CGFloat)cornerRadius;`
+	set background image corner radius
+
  - `+ (void)setShadowEnabled:(BOOL)shadowEnabled;`
 	enable/disable shadow under popover
 
@@ -46,7 +49,3 @@ License
 ---------------
 
 DDPopoverBackgroundView is available under the MIT license. See the LICENSE file for more info.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ddebin/ddpopoverbackgroundview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
